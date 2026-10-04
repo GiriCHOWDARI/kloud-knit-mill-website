@@ -1,0 +1,3 @@
+KKM Catalyst static website - blue banner patch
+
+This build initializes the original Kloud Knit Mill statistics counter with the verified values so the blue statistics banner renders immediately on static Catalyst hosting, without depending on /api/getvalues for first paint. The /api/getvalues file is retained for compatibility.

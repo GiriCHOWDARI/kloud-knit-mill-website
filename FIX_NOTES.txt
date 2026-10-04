@@ -1,0 +1,17 @@
+Kloud Knit Mill clone - image fix (patched static build)
+
+1. _next/static/chunks/main-*.js and 632-*.js
+   next/image config changed: unoptimized:false -> true
+   (static hosting has no /_next/image optimizer; images now load from /images, /icons, etc. directly)
+2. All index.html pages: removed the pre-rendered "bg_counter" stats section
+   (it was a frozen browser DOM snapshot and caused React hydration error #418,
+   which made React re-render every image through /_next/image -> 404)
+3. All index.html pages: fixed double-encoded footer text "Â©" -> "©"
+4. Added /api/getvalues (static JSON) so the stats counter loads like the original:
+   {"Spin_Spindles":140000,"spin_dai":45,"knit_mac":240,"knit_capa":48,"Dyeing_mach":50,
+    "dyeing":100,"embroid_mach":15,"embroider_daily":15000,"print":25000,"sew_mach":340,"cut_to_pack":34000}
+
+Still needs a backend on Catalyst (not fixable in a static build):
+   /api/makeenquire  (enquiry form submit)
+   /api/formupdate   (admin)
+   /api/auth/*       (admin login, next-auth)
